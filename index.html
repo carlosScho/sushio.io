@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Sushioferta | Sistema de pedidos</title>
+	<meta name="author" content="Felipe Vergara" />
+	<meta name="description" content="Realiza tu pedido de sushi, por medio de esta plataforma. Facil y sencillo" />
+	<meta name="keywords"  content="sushi, valdivia , chile ,pedido" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
+	
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="vendors/scrolloverflow.js"></script>
+
+	<script type="text/javascript" src="js/jquery.fullPage.js"></script>
+	<script type="text/javascript">
+	var x,i,pedidofinaltxt ;
+	var alerta = false;
+		$(document).ready(function() {
+			$('#pagina').fullpage({
+				sectionsColor: ['#fff', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
+				anchors: ['inicio', 'primerpaso', 'segundopaso', 'tercerpaso', 'lastPage'],
+				menu: '#menu',
+
+				//equivalent to jQuery `easeOutBack` extracted from http://matthewlein.com/ceaser/
+				easingcss3: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)'
+			});
+			$('#section0').css("background-image", "url(img/sushi_inicio2017.jpg)");
+			$('#section0').css("background-repeat", "no-repeat");
+			$('#section0').css("background-size", "cover");
+			$('input[type=radio][name=cantidaddebocados]').change(function() {
+				$("#ingredientes").empty();
+				$("#ingredientes").append('<div class="row"><div class="col" style="font-size: 14px;">Ingrediente 1</div><div class="col" style="font-size: 14px;">Ingrediente 2</div> <div class="col" style="font-size: 14px;">Envoltorio</div></div>');
+		        if (this.value == 'bocadosdos') {
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		        }
+		        else if (this.value == 'bocadostres') {
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		        }
+		        else if (this.value == 'bocadoscuatro') {
+		        	$("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		        }
+		        else if (this.value == 'bocadoscinco') {
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		        }
+		        else if (this.value == 'bocadosseis') {
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
+		        }
+		    });
+			$("body").change(function() {
+				document.getElementById('detallefinal').innerHTML = "";
+				if (document.getElementById('ingredientes').textContent != "Ups! , Creo que te has saltado un paso" ){
+					pedidofinaltxt = "";
+					pedidofinalwsp = "";
+					x = document.getElementsByClassName("inputpasodos");
+					alerta = true;
+					document.getElementById('botondepedido').disabled = true;
+					document.getElementById('botondepedido').className = "btn btn-danger";
+					for (i = 0 ; i < x.length; i++) {
+						if (x[i].value.toString() == "-") {
+							alerta = false;
+							
+						
+						}
+						
+						c = i%3;
+						if (c == 0) {
+								pedidofinalwsp = pedidofinalwsp + "[" +  x[i].value.toString() + " + ";
+								pedidofinaltxt = pedidofinaltxt + "[<strong>" +  x[i].value.toString() + "</strong> + <strong>";
+							}
+						else if(c == 1) {
+							pedidofinalwsp = pedidofinalwsp  +  x[i].value.toString() + "] -> ";
+							pedidofinaltxt = pedidofinaltxt  +  x[i].value.toString() + "</strong>] -> ";
+						}
+						else{
+							pedidofinalwsp = pedidofinalwsp + x[i].value.toString() ;
+							pedidofinaltxt = pedidofinaltxt + x[i].value.toString() + " <br>";
+						}
+						
+						
+					}
+					if (alerta){
+						if (x.length >= 0) {
+							document.getElementById('detallefinal').innerHTML = "<h1>Tu pedido es el siguiente:</h1>" + pedidofinaltxt + "<hr>" + "A nombre de :" +document.getElementById('nombredelpedido').value +"<br>" + "Dirección: " + document.getElementById('direcciondelpedido').value + "<br>" + "Detalles Adicionales: " + document.getElementById('detallesdelpedido').value + "<br>"+ "<strong>Copia y pega o</strong>";
+							if (document.getElementById('direcciondelpedido').value != "") {
+								document.getElementById('linkboton').href = "whatsapp://send?text=" + "Mi nombre es :" + " - " +document.getElementById('nombredelpedido').value + "y mi pedido es el siguiente:" + pedidofinalwsp + " * Dirección: " + document.getElementById('direcciondelpedido').value + " * Detalles Adicionales: " + document.getElementById('detallesdelpedido').value;
+								document.getElementById('botondepedido').disabled = false;
+								document.getElementById('botondepedido').className = "btn btn-success";
+							}
+						}	
+					}
+					
+				}
+			});	
+		});
+
+	</script>
+	<script type="text/javascript">
+		var ingredientes1 = ["-","Pollo Teriyaki", "Pollo Agridulce" , "Camarón" , "Carne Salteada" , "Kanikama" , "Camarón Tempura", "Pollo Apanado"];
+		var ingredientes2 = ["-","Palta", "Cebollín", "Palmito", "Cloclito de coctel", "Pimentón Grillado", "Vegetales Tempura", "Champiñones"];
+		var envoltorioss = ["-","Palta" , "Queso Crema + Ciboulette", "Panko", "Tempura", "Sésamo", "Nory", "Solo Arroz", "Pankeso(Queso crema + Panko)" ];
+		var opcion1 = '<div class="col"> <select class="inputpasodos ingredienteuno">';
+		var opcion2 = '<div class="col"> <select class="inputpasodos ingredientedos">';
+		var opcion3 = '<div class="col"> <select class="inputpasodos ingredientetres">';
+		for (var i = 0; i < ingredientes1.length; i++) {
+		    // Iterate over numeric indexes from 0 to 5, as everyone expects.
+		    opcion1 = opcion1 + ' <option value="'+ ingredientes1[i] +'">'+ ingredientes1[i] +'</option>';
+		}
+		opcion1 = opcion1 + '</select></div>';
+		for (var i = 0; i < ingredientes2.length; i++) {
+		    // Iterate over numeric indexes from 0 to 5, as everyone expects.
+		    opcion2 = opcion2 + ' <option value="'+ ingredientes2[i] +'">'+ ingredientes2[i] +'</option>';
+		}
+		opcion2 = opcion2 + '</select></div>';
+		for (var i = 0; i < envoltorioss.length; i++) {
+		    // Iterate over numeric indexes from 0 to 5, as everyone expects.
+		    opcion3 = opcion3 + ' <option value="'+ envoltorioss[i] +'">'+ envoltorioss[i] +'</option>';
+		}
+		opcion3 = opcion3 + '</select></div>';
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/examples.css" />
+</head>
+<body>
+
+
+<center><ul id="menu">
+	<li data-menuanchor="inicio"><a href="#inicio">Inicio</a></li>
+	<li data-menuanchor="primerpaso"><a href="#primerpaso">1º Paso</a></li>
+	<li data-menuanchor="segundopaso"><a href="#segundopaso">2º Paso</a></li>
+	<li data-menuanchor="tercerpaso"><a href="#tercerpaso">3º Paso</a></li>
+</ul></center>
+
+
+<div id="pagina">
+	<div class="section " id="section0">
+		<h1 class="inicioclass">Elije tu promo en 3 simples</h1>
+		<div class="contenido-izq">
+		<p><strong>Primer Paso:</strong> Elije tu promoción preferida </p>
+		<p><strong>Segundo Paso:</strong> Escoge tus ingredientes y envoltorios preferidos</p>
+		<p><strong>Tercer Paso:</strong> Confirma tu pedido</p>
+		</div>
+	</div>
+	<div class="section" id="section1">
+		<div class="intro">
+			<h1>Primer Paso</h1>
+			<p>Agrega el siguiente numero: <strong><a href="tel:+56986243186">+56 9 8624 3186</a></strong> y luego</p>
+			<p>Elije tu promoción preferida</p>
+
+			 <div class="row">
+			  <div class="col-lg-12">
+			   <div class="form-check classbocados">
+				    <input class="form-check-input" type="radio" name="cantidaddebocados" id="cantidaddebocados" value="bocadosdos">
+				    20 bocados a elección por solo $5.990 &nbsp;<br>
+				    <input class="form-check-input" type="radio" name="cantidaddebocados" id="cantidaddebocados"  value="bocadostres">
+				    30 bocados a elección por solo $8.990 &nbsp;<br>
+				    <input class="form-check-input" type="radio" name="cantidaddebocados" id="cantidaddebocados"  value="bocadoscuatro">
+				    40 bocados a elección por solo $10.990<br>
+				    <input class="form-check-input" type="radio" name="cantidaddebocados" id="cantidaddebocados"  value="bocadoscinco">
+				    50 bocados a elección por solo $12.990<br>
+				    <input class="form-check-input" type="radio" name="cantidaddebocados" id="cantidaddebocados"  value="bocadosseis">
+				    60 bocados a elección por solo $15.990<br>
+				</div>
+			  </div>
+		
+			</div>
+
+		</div>
+	</div>
+	<div class="section" id="section2">
+		<div class="intro">
+			<h1>Segundo Paso</h1>
+			<p>Escoge tus ingredientes y envoltorios preferidos</p>
+			
+
+				<div id="ingredientes"><br><hr><strong><h1 style="color: 000;">Ups! , Creo que te has saltado un paso</h1></strong><hr></div>
+			
+			
+		</div>
+	</div>
+	<div class="section" id="section3">
+		<div class="intro">
+			<h1>Tercer Paso</h1>
+			<p><strong>¡Tu pedido esta casi listo!</strong>, solo necesitamos lo siguiente</p>
+			<div class="container">
+			<br>
+				<div class="input-group">
+				  <span class="input-group-addon" id="basic-addon1">Nombre:</span>
+				  <input id="nombredelpedido" type="text" class="form-control" placeholder="Tu nombre" aria-label="nombre" aria-describedby="basic-addon1">
+				</div><br>
+				<div class="input-group">
+				  <span class="input-group-addon" style="font-size: 12px;" id="basic-addon1">Dirección:</span>
+				  <input id="direcciondelpedido" type="text" class="form-control" style="font-size: 11px;" placeholder="Tu Dirección" aria-label="Dirección" aria-describedby="basic-addon1">
+				</div>
+				<br>
+				<span class="input-group-addon" style="font-size: 12px;">Detalles adicionales</span>
+				<textarea id="detallesdelpedido" class="form-control custom-control" rows="2" style="font-size: 12px;" placeholder="Escribe aquí, si quieres comentar algo sobre el pedido"></textarea>   
+    			
+				<div id="detallefinal"></div>
+				<a id="linkboton" href=""><button href=""	id="botondepedido" type="button" class="btn btn-danger" disabled>Envia Pedido por Whatsapp</button></a>
+
+
+
+
+
+
+			</div>
+		</div>
+		<br>
+		<p style="float: right; font-size: 8px;">Desarrollado por <a style="float: right; font-size: 8px; margin-right: 20px; " href="http://fvergara.cl"> &nbsp;Fvergara</a></p>
+	</div>
+
+</div>
+
+</body>
+</html>
