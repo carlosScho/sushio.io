@@ -74,7 +74,7 @@
 		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
 		        }
 		    });
-			$("body").change(function() {
+			$("body").keyup(function() {
 				document.getElementById('detallefinal').innerHTML = "";
 				if (document.getElementById('ingredientes').textContent != "Ups! , Creo que te has saltado un paso" ){
 					pedidofinaltxt = "";
