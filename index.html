@@ -74,7 +74,7 @@
 		            $("#ingredientes").append('<div class="row">'+ opcion1 + opcion2 + opcion3+ '</div>');
 		        }
 		    });
-			$("body").change(function() {
+			$("body").keyup(function() {
 				document.getElementById('detallefinal').innerHTML = "";
 				if (document.getElementById('ingredientes').textContent != "Ups! , Creo que te has saltado un paso" ){
 					pedidofinaltxt = "";
@@ -110,7 +110,7 @@
 						if (x.length >= 0) {
 							document.getElementById('detallefinal').innerHTML = "<h1>Tu pedido es el siguiente:</h1>" + pedidofinaltxt + "<hr>" + "A nombre de :" +document.getElementById('nombredelpedido').value +"<br>" + "Dirección: " + document.getElementById('direcciondelpedido').value + "<br>" + "Detalles Adicionales: " + document.getElementById('detallesdelpedido').value + "<br>"+ "<strong>Copia y pega o</strong>";
 							if (document.getElementById('direcciondelpedido').value != "") {
-								document.getElementById('linkboton').href = "whatsapp://send?text=" + "Mi nombre es :" + " - " +document.getElementById('nombredelpedido').value + "y mi pedido es el siguiente:" + pedidofinalwsp + " * Dirección: " + document.getElementById('direcciondelpedido').value + " * Detalles Adicionales: " + document.getElementById('detallesdelpedido').value;
+								document.getElementById('linkboton').href = "whatsapp://send?phone=56986243186&?text=" + "Mi nombre es :" + " - " +document.getElementById('nombredelpedido').value + "y mi pedido es el siguiente:" + pedidofinalwsp + " * Dirección: " + document.getElementById('direcciondelpedido').value + " * Detalles Adicionales: " + document.getElementById('detallesdelpedido').value;
 								document.getElementById('botondepedido').disabled = false;
 								document.getElementById('botondepedido').className = "btn btn-success";
 							}
